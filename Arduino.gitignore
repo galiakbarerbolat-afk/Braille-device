@@ -1,0 +1,57 @@
+# ESP32/Arduino Build Files
+*.bin
+*.elf
+*.map
+*.hex
+
+# Compiled Object files
+*.o
+*.a
+*.so
+*.obj
+
+# Build directories
+build/
+.build/
+*.build/
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Arduino IDE
+*.ino.cpp
+*.ino.globals.h
+libraries/
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# ESP32 specific
+sdkconfig
+sdkconfig.old
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# OS Files
+Thumbs.db
+Desktop.ini
+
+# Private/Secret files
+secrets.h
+passwords.txt
+config.h
+*.pem
+*.key
