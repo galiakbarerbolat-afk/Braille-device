@@ -15,10 +15,6 @@ AI-powered Braille display device supporting English, Russian, and Kazakh langua
 3. Open Serial Monitor (115200 baud)
 4. Type text and press Enter
 
-## Documentation
-- [Hardware Guide](HARDWARE_DOCUMENTATION_SINGLE.md)
-- [Block Diagrams](BLOCK_DIAGRAMS_SINGLE.md)
-- [Complete README](README_SINGLE.md)
 
 ## Circuit
 ESP32 → MOSFET → Solenoid
