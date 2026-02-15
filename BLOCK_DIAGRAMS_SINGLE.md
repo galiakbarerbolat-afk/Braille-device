@@ -4,7 +4,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    COMPLETE SYSTEM FLOW (SIMPLIFIED)                     │
+│                    COMPLETE SYSTEM FLOW (SIMPLIFIED)                    │
 └─────────────────────────────────────────────────────────────────────────┘
 
                     ┌──────────────────┐
@@ -19,52 +19,52 @@
         │              ESP32 COMPLETE SYSTEM                 │
         │          (Translation + Solenoid Control)          │
         │                                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  Text Reception & Buffering                  │ │
-        │  │  Serial.available() → inputBuffer           │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  Text Reception & Buffering                  │  │
+        │  │  Serial.available() → inputBuffer            │  │
+        │  └────────────┬─────────────────────────────────┘  │
         │               │                                    │
         │               ▼                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  Character-by-Character Processing           │ │
-        │  │  • Detect Language (EN/RU/KZ)               │ │
-        │  │  • Handle Capitals & Numbers                │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  Character-by-Character Processing           │  │
+        │  │  • Detect Language (EN/RU/KZ)                │  │
+        │  │  • Handle Capitals & Numbers                 │  │
+        │  └────────────┬─────────────────────────────────┘  │
         │               │                                    │
         │               ▼                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  Array Lookup                                │ │
-        │  │  • ENGLISH_LOWER[26]                        │ │
-        │  │  • RUSSIAN_CHARS[33]                        │ │
-        │  │  • KAZAKH_CHARS[9]                          │ │
-        │  │  • NUMBERS[10] + PUNCTUATION[12]            │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  Array Lookup                                │  │
+        │  │  • ENGLISH_LOWER[26]                         │  │
+        │  │  • RUSSIAN_CHARS[33]                         │  │
+        │  │  • KAZAKH_CHARS[9]                           │  │
+        │  │  • NUMBERS[10] + PUNCTUATION[12]             │  │
+        │  └────────────┬─────────────────────────────────┘  │
         │               │                                    │
         │               ▼                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  6-Bit Pattern Generation                    │ │
-        │  │  Example: 'h' → 0b010011                    │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  6-Bit Pattern Generation                    │  │
+        │  │  Example: 'h' → 0b010011                     │  │
+        │  └────────────┬─────────────────────────────────┘  │
         │               │                                    │
         │               ▼                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  GPIO Pin Control                            │ │
-        │  │  • GPIO25 (Dot 1)                           │ │
-        │  │  • GPIO26 (Dot 2)                           │ │
-        │  │  • GPIO27 (Dot 3)                           │ │
-        │  │  • GPIO32 (Dot 4)                           │ │
-        │  │  • GPIO33 (Dot 5)                           │ │
-        │  │  • GPIO14 (Dot 6)                           │ │
-        │  │  digitalWrite(pin, HIGH/LOW)                │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  GPIO Pin Control                            │  │
+        │  │  • GPIO25 (Dot 1)                            │  │
+        │  │  • GPIO26 (Dot 2)                            │  │
+        │  │  • GPIO27 (Dot 3)                            │  │
+        │  │  • GPIO32 (Dot 4)                            │  │
+        │  │  • GPIO33 (Dot 5)                            │  │
+        │  │  • GPIO14 (Dot 6)                            │  │
+        │  │  digitalWrite(pin, HIGH/LOW)                 │  │
+        │  └────────────┬─────────────────────────────────┘  │
         │               │                                    │
         │               ▼                                    │
-        │  ┌──────────────────────────────────────────────┐ │
-        │  │  Timing Control                              │ │
-        │  │  • Retract: 50ms                            │ │
-        │  │  • Extend: 50ms                             │ │
-        │  │  • Hold: 950ms                              │ │
-        │  └────────────┬─────────────────────────────────┘ │
+        │  ┌──────────────────────────────────────────────┐  │
+        │  │  Timing Control                              │  │
+        │  │  • Retract: 50ms                             │  │
+        │  │  • Extend: 50ms                              │  │
+        │  │  • Hold: 950ms                               │  │
+        │  └────────────┬─────────────────────────────────┘  │
         └───────────────┼────────────────────────────────────┘
                         │
                         │ 6 GPIO Signals (3.3V)
@@ -73,13 +73,13 @@
         ┌────────────────────────────────────────────────┐
         │          MOSFET DRIVER ARRAY (×6)              │
         │                                                │
-        │  ┌──────┐  ┌──────┐  ┌──────┐                │
-        │  │ MOS1 │  │ MOS2 │  │ MOS3 │                │
-        │  └──┬───┘  └──┬───┘  └──┬───┘                │
+        │  ┌──────┐  ┌──────┐  ┌──────┐                  │
+        │  │ MOS1 │  │ MOS2 │  │ MOS3 │                  │
+        │  └──┬───┘  └──┬───┘  └──┬───┘                  │
         │     │         │         │                      │
-        │  ┌──────┐  ┌──────┐  ┌──────┐                │
-        │  │ MOS4 │  │ MOS5 │  │ MOS6 │                │
-        │  └──┬───┘  └──┬───┘  └──┬───┘                │
+        │  ┌──────┐  ┌──────┐  ┌──────┐                  │
+        │  │ MOS4 │  │ MOS5 │  │ MOS6 │                  │
+        │  └──┬───┘  └──┬───┘  └──┬───┘                  │
         └─────┼─────────┼─────────┼──────────────────────┘
               │         │         │
               │ Control Solenoids (5V power) │
@@ -93,7 +93,7 @@
         │         │  │                               │
         │         ●──●    (3) (6)                    │
         │                                            │
-        │    Dots 1,2,5 raised = letter 'h'         │
+        │    Dots 1,2,5 raised = letter 'h'          │
         └────────────────────────────────────────────┘
                         │
                         │ Physical Tactile Output
@@ -103,15 +103,6 @@
                   │  READING │
                   └──────────┘
 
-
-KEY SIMPLIFICATIONS vs Two-Chip Version:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ No UART communication layer
-✅ No second microcontroller
-✅ Direct GPIO control
-✅ Simpler wiring
-✅ Single code upload
-✅ Easier debugging
 ```
 
 ---
@@ -159,22 +150,22 @@ START
            │
            ▼
     ┌───────────────┐
-    │ Is Uppercase? │─── YES ──→┌─────────────────────┐
+    │ Is Uppercase? │─── YES ──→ ┌─────────────────────┐
     └───────┬───────┘            │ Display CAPITAL_IND │
             │ NO                 │ (dot 6 only)        │
             │                    │ Wait 1000ms         │
             │                    └──────────┬──────────┘
             ▼                               │
-    ┌───────────────┐                      │
-    │ Is Number?    │─── YES ──→┌──────────┴──────────┐
+    ┌───────────────┐                       │
+    │ Is Number?    │─── YES ──→ ┌──────────┴──────────┐
     └───────┬───────┘            │ Display NUMBER_IND  │
             │ NO                 │ (dots 1,2,3,4)      │
             │                    │ Set numberMode=true │
             │                    │ Wait 1000ms         │
             │                    └──────────┬──────────┘
             ▼                               │
-    ┌──────────────────────┐               │
-    │ Array Lookup         │←──────────────┘
+    ┌──────────────────────┐                │
+    │ Array Lookup         │ ←──────────────┘
     │ getBraillePattern(c) │
     │ Returns: 6-bit value │
     └────────┬─────────────┘
@@ -183,10 +174,10 @@ START
     ┌────────────────────┐
     │ Display Pattern    │
     │ ┌────────────────┐ │
-    │ │ 1. Retract all│ │
-    │ │ 2. Extend dots│ │
-    │ │ 3. Hold 1000ms│ │
-    │ │ 4. Retract all│ │
+    │ │ 1. Retract all │ │
+    │ │ 2. Extend dots │ │
+    │ │ 3. Hold 1000ms │ │
+    │ │ 4. Retract all │ │
     │ └────────────────┘ │
     └────────┬───────────┘
              │
@@ -203,16 +194,6 @@ START
              │
              ▼
            DONE
-
-COMPARED TO TWO-CHIP VERSION:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ No "Send via UART" step
-✅ No "Wait for ATtiny" step
-✅ Direct GPIO control instead
-✅ All in one continuous flow
-```
-
----
 
 ## 3. GPIO Control Detail
 
@@ -442,16 +423,6 @@ TOTAL TIME: ~1100ms
   • 950ms hold
   • 50ms final retract
 
-COMPARISON TO TWO-CHIP:
-━━━━━━━━━━━━━━━━━━━━━━━━
-Same timing, but:
-✅ No UART transmission delay
-✅ No inter-chip handshaking
-✅ Direct control = simpler
-```
-
----
-
 ## 5. Hardware Wiring Diagram
 
 ```
@@ -580,82 +551,64 @@ Option 2: Single Supply (Production)
                           ▼
                    ┌─────────────┐
             ┌─────>│    IDLE     │<──────────────┐
-            │      │ Waiting for │               │
-            │      │   Serial    │               │
-            │      └──────┬──────┘               │
+            │      │ Waiting for │                │
+            │      │   Serial    │                │
+            │      └──────┬──────┘                │
             │             │                       │
             │             │ Data received         │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │  BUFFERING   │              │
-            │      │ Accumulating │              │
-            │      │  characters  │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │  BUFFERING   │               │
+            │      │ Accumulating │               │
+            │      │  characters  │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             │ Newline               │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │ PROCESSING   │              │
-            │      │ Loop through │              │
-            │      │ each char    │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │ PROCESSING   │               │
+            │      │ Loop through │               │
+            │      │ each char    │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │  TRANSLATE   │              │
-            │      │ Array lookup │              │
-            │      │ Get pattern  │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │  TRANSLATE   │               │
+            │      │ Array lookup │               │
+            │      │ Get pattern  │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │  RETRACTING  │              │
-            │      │ All GPIO LOW │              │
-            │      │   (50ms)     │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │  RETRACTING  │               │
+            │      │ All GPIO LOW │               │
+            │      │   (50ms)     │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │  EXTENDING   │              │
-            │      │ Set GPIO per │              │
-            │      │   pattern    │              │
-            │      │   (50ms)     │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │  EXTENDING   │               │
+            │      │ Set GPIO per │               │
+            │      │   pattern    │               │
+            │      │   (50ms)     │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             ▼                       │
-            │      ┌──────────────┐              │
-            │      │   HOLDING    │              │
-            │      │ Maintain pos.│              │
-            │      │   (950ms)    │              │
-            │      └──────┬───────┘              │
+            │      ┌──────────────┐               │
+            │      │   HOLDING    │               │
+            │      │ Maintain pos.│               │
+            │      │   (950ms)    │               │
+            │      └──────┬───────┘               │
             │             │                       │
             │             ▼                       │
-            │      ┌──────────────┐              │
+            │      ┌──────────────┐               │
             │      │ More chars?  │──YES→Loop back│
-            │      └──────┬───────┘              │
+            │      └──────┬───────┘               │
             │             │ NO                    │
             └─────────────┴───────────────────────┘
 
 
-COMPARISON TO TWO-CHIP VERSION:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Two-Chip:            Single-Chip:
-━━━━━━━━━━━━━━━━     ━━━━━━━━━━━━━━━━━━
-ESP32 States:        Combined States:
-• IDLE               • IDLE
-• PROCESSING         • PROCESSING
-• TRANSLATING        • TRANSLATING
-• SENDING (UART)     [REMOVED]
-• WAITING            [REMOVED]
-                     • EXTENDING (NEW)
-ATtiny States:       • HOLDING (NEW)
-• IDLE               [MERGED INTO ESP32]
-• RECEIVING          [NO LONGER NEEDED]
-• DECODING           [DONE IN TRANSLATE]
-• EXTENDING          [DIRECT GPIO]
-• HOLDING            [DIRECT GPIO]
 
-Result: SIMPLER, FEWER STATES!
 ```
 
 ---
@@ -677,13 +630,13 @@ FLASH (Program Memory - 4MB typical)
 │  • All functions                │
 ├─────────────────────────────────┤
 │  CONSTANT ARRAYS                │
-│  ┌───────────────────────────┐ │
-│  │ ENGLISH_LOWER[26]         │ │ 52 bytes
-│  │ NUMBERS[10]               │ │ 20 bytes
-│  │ PUNCTUATION[12]           │ │ 24 bytes
-│  │ RUSSIAN_CHARS[33]         │ │ 66 bytes
-│  │ KAZAKH_CHARS[9]           │ │ 18 bytes
-│  └───────────────────────────┘ │
+│  ┌───────────────────────────┐  │
+│  │ ENGLISH_LOWER[26]         │  │ 52 bytes
+│  │ NUMBERS[10]               │  │ 20 bytes
+│  │ PUNCTUATION[12]           │  │ 24 bytes
+│  │ RUSSIAN_CHARS[33]         │  │ 66 bytes
+│  │ KAZAKH_CHARS[9]           │  │ 18 bytes
+│  └───────────────────────────┘  │
 ├─────────────────────────────────┤
 │  SOLENOID_PINS[6]               │ 6 bytes
 │  Timing Constants               │ 16 bytes
@@ -698,11 +651,11 @@ RAM (SRAM - 520KB total)
 │  Stack (Core 1)                 │ ~8KB
 ├─────────────────────────────────┤
 │  VARIABLES                      │
-│  ┌───────────────────────────┐ │
-│  │ inputBuffer (String)      │ │ Variable
-│  │ processingComplete (bool) │ │ 1 byte
-│  │ Current pattern (uint8_t) │ │ 1 byte
-│  └───────────────────────────┘ │
+│  ┌───────────────────────────┐  │
+│  │ inputBuffer (String)      │  │ Variable
+│  │ processingComplete (bool) │  │ 1 byte
+│  │ Current pattern (uint8_t) │  │ 1 byte
+│  └───────────────────────────┘  │
 ├─────────────────────────────────┤
 │  Serial Buffer                  │ 256 bytes
 ├─────────────────────────────────┤
@@ -733,90 +686,3 @@ PLENTY OF ROOM FOR EXPANSION!
 ```
 
 ---
-
-## 8. Comparison: Single-Chip vs Two-Chip
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│              ARCHITECTURE COMPARISON DIAGRAM                            │
-└────────────────────────────────────────────────────────────────────────┘
-
-TWO-CHIP VERSION (ESP32 + ATtiny1614)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-┌──────────┐          ┌──────────┐
-│  ESP32   │  UART    │ ATtiny   │
-│          │  9600    │  1614    │
-│          │  baud    │          │
-│          │          │          │
-│ Translate│ ──────→  │ Solenoid │
-│  Logic   │   1 byte │ Control  │
-│          │          │          │
-│ Complex  │          │ Simple   │
-│ Fast     │          │ Dedicated│
-└──────────┘          └────┬─────┘
-                           │
-                           ▼
-                    6 Solenoids
-
-Pros:
-+ Modular (separate concerns)
-+ Can upgrade translation without touching output
-+ ATtiny dedicated to timing-critical tasks
-
-Cons:
-- More complex wiring
-- Two codes to upload
-- UART communication can fail
-- More expensive
-- Harder to debug
-
-
-SINGLE-CHIP VERSION (ESP32 Only)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-┌──────────────────┐
-│      ESP32       │
-│                  │
-│   Translate      │
-│      +           │
-│   Solenoid       │
-│   Control        │
-│                  │
-│   All-in-One     │
-└────────┬─────────┘
-         │
-         │ Direct GPIO
-         ▼
-  6 Solenoids
-
-Pros:
-+ Simpler wiring
-+ One code to upload
-+ No communication layer
-+ Less expensive
-+ Easier to debug
-+ Direct control
-+ More GPIO available
-
-Cons:
-- Single point of failure
-- All processing in one chip
-
-
-VERDICT FOR MOST PROJECTS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ SINGLE-CHIP (ESP32 only)
-
-Unless you need:
-• >30 solenoids (GPIO limitation)
-• Absolute real-time guarantees
-• Modular swappable components
-• Distributed processing
-
-For typical Braille display (6-12 dots):
-→ Single-chip is BETTER
-```
-
-This completes the simplified block diagrams for the single-chip version!
